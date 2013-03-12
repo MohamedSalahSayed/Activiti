@@ -23,6 +23,7 @@ import org.activiti.engine.identity.Group;
 import org.activiti.engine.identity.User;
 import org.activiti.engine.impl.identity.Authentication;
 import org.activiti.explorer.Constants;
+import org.activiti.explorer.ExplorerApp;
 import org.activiti.explorer.identity.LoggedInUser;
 import org.activiti.explorer.identity.LoggedInUserImpl;
 
@@ -61,7 +62,10 @@ public class DefaultLoginHandler implements LoginHandler {
   }
   
   public void onRequestStart(HttpServletRequest request, HttpServletResponse response) {
-    // Noting to do here
+    if(ExplorerApp.get().getLoggedInUser() != null && request.getSession(false) != null)
+    	if(request.getSession(false).getAttribute(Constants.AUTHENTICATED_USER_ID) == null)
+    		request.getSession(false).setAttribute(Constants.AUTHENTICATED_USER_ID, 
+    				ExplorerApp.get().getLoggedInUser().getId());
   }
 
   public void onRequestEnd(HttpServletRequest request, HttpServletResponse response) {
