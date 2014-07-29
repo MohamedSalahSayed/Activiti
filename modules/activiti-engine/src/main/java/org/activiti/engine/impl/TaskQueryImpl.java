@@ -23,6 +23,7 @@ import org.activiti.engine.impl.interceptor.CommandContext;
 import org.activiti.engine.impl.interceptor.CommandExecutor;
 import org.activiti.engine.impl.persistence.entity.SuspensionState;
 import org.activiti.engine.impl.variable.VariableTypes;
+import org.activiti.engine.query.QueryParameters;
 import org.activiti.engine.task.DelegationState;
 import org.activiti.engine.task.Task;
 import org.activiti.engine.task.TaskQuery;
@@ -93,6 +94,14 @@ public class TaskQueryImpl extends AbstractVariableQueryImpl<TaskQuery, Task> im
   
   public TaskQueryImpl(CommandExecutor commandExecutor) {
     super(commandExecutor);
+  }
+  
+  public TaskQueryImpl(CommandContext commandContext, QueryParameters params) {
+	super(commandContext, params);
+  }
+	  
+  public TaskQueryImpl(CommandExecutor commandExecutor, QueryParameters params) {
+	super(commandExecutor, params);
   }
 
   public TaskQueryImpl taskId(String taskId) {
