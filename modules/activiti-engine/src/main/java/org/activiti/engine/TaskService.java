@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.activiti.engine.query.NativeQuery;
+import org.activiti.engine.query.QueryParameters;
 import org.activiti.engine.task.Attachment;
 import org.activiti.engine.task.Comment;
 import org.activiti.engine.task.DelegationState;
@@ -320,6 +321,13 @@ public interface TaskService {
    * Returns a new {@link TaskQuery} that can be used to dynamically query tasks.
    */
   TaskQuery createTaskQuery();
+  
+  /**
+   * Returns a new {@link TaskQuery} that can be used to dynamically query tasks.
+   * 
+   * @param queryParameters holds custom query parameters
+   */
+  TaskQuery createTaskQuery(QueryParameters queryParameters);
   
   /**
    * Returns a new {@link NativeQuery} for tasks.
