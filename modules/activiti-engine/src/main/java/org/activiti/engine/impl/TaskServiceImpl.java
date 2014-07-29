@@ -56,6 +56,7 @@ import org.activiti.engine.impl.cmd.SaveTaskCmd;
 import org.activiti.engine.impl.cmd.SetTaskDueDateCmd;
 import org.activiti.engine.impl.cmd.SetTaskPriorityCmd;
 import org.activiti.engine.impl.cmd.SetTaskVariablesCmd;
+import org.activiti.engine.query.QueryParameters;
 import org.activiti.engine.task.Attachment;
 import org.activiti.engine.task.Comment;
 import org.activiti.engine.task.Event;
@@ -195,7 +196,11 @@ public class TaskServiceImpl extends ServiceImpl implements TaskService {
   }
   
   public TaskQuery createTaskQuery() {
-    return new TaskQueryImpl(commandExecutor);
+    return createTaskQuery(null);
+  }
+  
+  public TaskQuery createTaskQuery(QueryParameters queryParameters) {
+	return new TaskQueryImpl(commandExecutor, queryParameters);
   }
  
   public NativeTaskQuery createNativeTaskQuery() {
