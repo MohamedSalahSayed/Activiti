@@ -22,6 +22,7 @@ import org.activiti.engine.impl.interceptor.CommandContext;
 import org.activiti.engine.impl.interceptor.CommandExecutor;
 import org.activiti.engine.impl.variable.VariableTypes;
 import org.activiti.engine.query.Query;
+import org.activiti.engine.query.QueryParameters;
 
 
 /**
@@ -44,6 +45,14 @@ public abstract class AbstractVariableQueryImpl<T extends Query<?,?>, U> extends
 
   public AbstractVariableQueryImpl(CommandExecutor commandExecutor) {
     super(commandExecutor);
+  }
+  
+  public AbstractVariableQueryImpl(CommandContext commandContext, QueryParameters params) {
+	super(commandContext, params);
+  }
+  
+  public AbstractVariableQueryImpl(CommandExecutor commandExecutor, QueryParameters params){
+	super(commandExecutor, params);
   }
 
   @Override
