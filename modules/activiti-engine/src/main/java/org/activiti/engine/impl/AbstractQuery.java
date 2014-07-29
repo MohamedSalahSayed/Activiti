@@ -23,6 +23,7 @@ import org.activiti.engine.impl.interceptor.Command;
 import org.activiti.engine.impl.interceptor.CommandContext;
 import org.activiti.engine.impl.interceptor.CommandExecutor;
 import org.activiti.engine.query.Query;
+import org.activiti.engine.query.QueryParameters;
 import org.activiti.engine.query.QueryProperty;
 
 
@@ -49,17 +50,29 @@ public abstract class AbstractQuery<T extends Query<?,?>, U> extends ListQueryPa
   protected ResultType resultType;
 
   protected QueryProperty orderProperty;
+  
+  protected QueryParameters params;
 
   protected AbstractQuery() {
     parameter = this;
   }
   
-  protected AbstractQuery(CommandExecutor commandExecutor) {
+  protected AbstractQuery(CommandExecutor commandExecutor, QueryParameters params) {
     this.commandExecutor = commandExecutor;
+    this.params = params;
   }
   
-  public AbstractQuery(CommandContext commandContext) {
+  public AbstractQuery(CommandContext commandContext, QueryParameters params) {
     this.commandContext = commandContext;
+    this.params = params;
+  }
+  
+  protected AbstractQuery(CommandExecutor commandExecutor) {
+	    this(commandExecutor, null);
+  }
+	  
+  public AbstractQuery(CommandContext commandContext) {
+	  this(commandContext, null);
   }
   
   public AbstractQuery<T, U> setCommandExecutor(CommandExecutor commandExecutor) {
@@ -179,5 +192,9 @@ public abstract class AbstractQuery<T extends Query<?,?>, U> extends ListQueryPa
     } else {
       return orderBy;
     }
+  }
+  
+  public QueryParameters getParams() {
+	return params;
   }
 }
